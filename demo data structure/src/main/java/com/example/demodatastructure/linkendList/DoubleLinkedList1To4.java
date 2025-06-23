@@ -73,6 +73,45 @@ public class DoubleLinkedList1To4 {
         }
     }
 
+    // Delete a Node at a Given Position
+    void  deleteNodeAtGivenPosition(Node input) {
+        if(head == null) return;
+
+        // single node
+        if(head == input && head == tail){
+            head= tail = null;
+        } else if(head == input) {
+            if(head.next != null) {
+                head.next.prev = head.prev;
+            }
+            head = head.next;
+        } else if(tail == input) {
+            tail.prev.next = tail.next;
+            tail = tail.prev;
+        } else {
+            input.prev.next = input.next;
+            input.next.prev = input.prev;
+        }
+
+        // head needs to delete
+        /*if(head == input) {
+            if(head.next != null) {
+                head.next.prev = head.prev;
+            }
+            head = head.next;
+        }*/
+
+        // tail needs to delete
+        /*if(tail == input) {
+            tail.prev.next = tail.next;
+            tail = tail.prev;
+        }*/
+
+        // middle node
+        /*input.prev.next = input.next;
+        input.next.prev = input.prev;*/
+    }
+
     void deleteNodeByValue(int data) {
         if(head == null) return;
 
@@ -187,7 +226,7 @@ public class DoubleLinkedList1To4 {
         return head;
     }
 
-    void removeNode(Node slow) {
+    private void removeNode(Node slow) {
         Node fast = head;
 
         while( fast != slow) {
@@ -203,77 +242,6 @@ public class DoubleLinkedList1To4 {
 
          part1.next = null;
     }
-
-
-
-   /* boolean checkPalindrome() {
-        if(head == null || head.next == null) return false;
-
-        // find middle --> slow node will be the middle node
-        Node fast = head;
-        Node slow = head;
-        while(fast != null && fast.next != null) {
-            slow = slow .next;
-            fast = fast.next.next;
-        }
-        // reverse middle node to rest of the double linked-list
-        Node secPart = revisePal(slow);
-
-
-        // Compare two parts.
-        Node firstPart = head;
-        while(secPart != null ) {
-            if(secPart.value != firstPart.value) {
-                return false;
-            }
-            firstPart = firstPart.next;
-            secPart = secPart.next;
-        }
-
-        return true;
-    }
-
-    Node revisePal(Node head) {
-        if(head == null || head.next == null) return head;
-        Node cur = head;
-        Node temp = null;
-        while(cur != null) {
-            temp = cur.prev;
-            cur.prev = cur.next;
-            cur.next = temp;
-            cur = cur.prev;
-        }
-
-        if(temp != null) {
-            head = temp.prev;
-        }
-        return head;
-    }*/
-
-    /*void deleteNodeByValue(int data) {
-        if(head == null) return;
-
-        Node curr = head;
-        if(head.value == data) {
-            curr = curr.next;
-            head = curr;
-        }
-        if(tail != null && tail.value == data) {
-            tail = tail.prev;
-            tail.next = null;
-            return;
-        }
-
-        while(curr != null && curr.value != data){
-            curr = curr.next;
-        }
-
-        if(curr != null && curr.value == data && curr.prev != null && curr.next != null ) {
-            curr.prev.next = curr.next;
-            curr.next.prev = curr.prev;
-        }
-
-    }*/
 
 
 }
